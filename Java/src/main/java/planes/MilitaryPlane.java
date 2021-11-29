@@ -1,4 +1,4 @@
-package Planes;
+package planes;
 
 import models.MilitaryType;
 
@@ -25,10 +25,12 @@ public class MilitaryPlane extends Plane{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof MilitaryPlane) || !super.equals(o)) { return false; }
-        return militaryType == ((MilitaryPlane) o).militaryType;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object instanceof MilitaryPlane && super.equals(object)) {
+            return militaryType == ((MilitaryPlane) object).militaryType;
+        }
+        return false;
     }
 
     @Override

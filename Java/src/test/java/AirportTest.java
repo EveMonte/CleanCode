@@ -1,12 +1,12 @@
-import Planes.ExperimentalPlane;
+import planes.ExperimentalPlane;
 import models.ClassificationLevel;
 import models.ExperimentalTypes;
 import models.MilitaryType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import Planes.MilitaryPlane;
-import Planes.PassengerPlane;
-import Planes.Plane;
+import planes.MilitaryPlane;
+import planes.PassengerPlane;
+import planes.Plane;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,19 +36,12 @@ public class AirportTest {
     private static PassengerPlane planeWithMaxPassengerCapacity = new PassengerPlane("Boeing-747", 980, 16100, 70500, 242);
 
     @Test
-    public void AreTransportMilitaryPlanesAtTheAirport() {
-        List<MilitaryPlane> transportMilitaryPlanes = (new Airport(planes)).getTransportMilitaryPlanes();
-        Assert.assertNotNull(transportMilitaryPlanes.stream().filter(plane -> plane.getMilitaryType() == MilitaryType.TRANSPORT));
-    }
-
-
-    @Test
-    public void FindPassengerPlaneWithMaxCapacity() {
+    public void findPassengerPlaneWithMaxCapacity() {
         Assert.assertTrue(planeWithMaxPassengerCapacity.equals((new Airport(planes)).getPassengerPlaneWithMaxPassengersCapacity()));
     }
 
     @Test
-    public void IsAscendingSortingByMaxLoadCapacityAtTheAirport() {
+    public void isAscendingSortingByMaxLoadCapacityAtTheAirport() {
         Airport airport = new Airport(planes);
         airport.sortByMaxLoadCapacity();
         List<? extends Plane> planesSortedByMaxLoadCapacity = airport.getPlanes();
@@ -58,13 +51,7 @@ public class AirportTest {
     }
 
     @Test
-    public void IsAtLeastOneBomberAtTheAirport() {
-        List<MilitaryPlane> bomberMilitaryPlanes = new Airport(planes).getBomberMilitaryPlanes();
-        Assert.assertNotNull(bomberMilitaryPlanes.stream().filter(plane -> plane.getMilitaryType() == MilitaryType.BOMBER));
-    }
-
-    @Test
-    public void ExperimentalPlanesHasNotUnclassifiedClassificationLevel(){
+    public void experimentalPlanesHasNotUnclassifiedClassificationLevel(){
         List<ExperimentalPlane> experimentalPlanes = (new Airport(planes)).getExperimentalPlanes();
         Assert.assertFalse(experimentalPlanes.stream().
                 anyMatch(plane -> plane.getClassificationLevel() == ClassificationLevel.UNCLASSIFIED));
